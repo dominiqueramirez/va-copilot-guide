@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Copilot at VA: How to Get Access &amp; Get Started</title>
+  <style>
+    :root {
+      --va-navy: #112e51;
+      --va-blue: #205493;
+      --va-light-blue: #dce4ef;
+      --va-gold: #fdb81e;
+      --va-green: #2e8540;
+      --va-red: #cd2026;
+      --text-dark: #212121;
+      --text-mid: #494440;
+      --border: #d6d7d9;
+      --bg-light: #f5f5f5;
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-dark);
+      background: var(--bg-light);
+    }
+
+    /* ── Header banner ── */
+    header {
+      background: var(--va-navy);
+      color: var(--white);
+      padding: 0;
+    }
+
+    .header-bar {
+      background: var(--va-gold);
+      height: 6px;
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 24px 24px;
+    }
+
+    .header-inner .badge {
+      display: inline-block;
+      background: var(--va-blue);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    header .subtitle {
+      font-size: 1rem;
+      color: #b9d3ee;
+      max-width: 640px;
+    }
+
+    /* ── Nav / TOC strip ── */
+    .toc-strip {
+      background: var(--va-blue);
+      border-bottom: 3px solid var(--va-gold);
+    }
+
+    .toc-strip-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+    }
+
+    .toc-strip-inner a {
+      color: #dce9f6;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .toc-strip-inner a:hover { color: var(--va-gold); text-decoration: underline; }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 36px 24px 60px;
+    }
+
+    /* ── Section cards ── */
+    .section-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .section-card-header {
+      background: var(--va-navy);
+      color: var(--white);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-card-header .step-num {
+      background: var(--va-gold);
+      color: var(--va-navy);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .section-card-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .section-card-body {
+      padding: 22px 24px;
+    }
+
+    .section-card-body p { margin-bottom: 14px; }
+    .section-card-body p:last-child { margin-bottom: 0; }
+
+    /* ── CTA Buttons ── */
+    .cta-btn {
+      display: inline-block;
+      background: var(--va-blue);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 11px 22px;
+      border-radius: 4px;
+      margin-top: 6px;
+      margin-right: 8px;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+    }
+
+    .cta-btn:hover { background: var(--va-navy); color: var(--white); text-decoration: none; }
+
+    .cta-btn.secondary {
+      background: var(--white);
+      color: var(--va-blue);
+      border: 2px solid var(--va-blue);
+    }
+
+    .cta-btn.secondary:hover { background: var(--va-light-blue); color: var(--va-blue); }
+
+    /* ── Sub-sections within cards ── */
+    .sub-section {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      margin-top: 18px;
+    }
+
+    .sub-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    .sub-section h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--va-navy);
+      margin-bottom: 10px;
+    }
+
+    /* ── Teams channel cards ── */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .teams-card {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--va-blue);
+      border-radius: 4px;
+      padding: 16px 18px;
+      background: #f9fbfd;
+    }
+
+    .teams-card.optional { border-left-color: var(--va-green); }
+
+    .teams-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--va-navy);
+      margin-bottom: 6px;
+    }
+
+    .teams-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin-bottom: 10px;
+    }
+
+    .teams-card a.cta-btn {
+      font-size: 0.82rem;
+      padding: 7px 14px;
+      margin-top: 0;
+    }
+
+    .teams-card .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 2px 7px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+
+    .tag-primary { background: var(--va-light-blue); color: var(--va-blue); }
+    .tag-optional { background: #d5e8d4; color: #1a5e20; }
+
+    /* ── Editor install buttons ── */
+    .editor-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    /* ── Resources list ── */
+    .resources-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .resources-list li {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+
+    .resources-list li:first-child { padding-top: 0; }
+    .resources-list li:last-child { border-bottom: none; }
+
+    .resources-list .res-title {
+      font-weight: 700;
+      color: var(--va-navy);
+      font-size: 0.95rem;
+    }
+
+    .resources-list .res-desc {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin: 4px 0 8px;
+    }
+
+    /* ── Troubleshooting ── */
+    .trouble-item {
+      border-left: 4px solid var(--va-red);
+      background: #fdf3f3;
+      border-radius: 0 4px 4px 0;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+
+    .trouble-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--va-red);
+      margin-bottom: 6px;
+    }
+
+    .trouble-item p {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .trouble-item p:last-child { margin-bottom: 0; }
+
+    /* ── Checklist ── */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--va-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .check-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--white);
+    }
+
+    .checklist .check-body strong {
+      display: block;
+      font-size: 0.97rem;
+      color: var(--va-navy);
+      margin-bottom: 4px;
+    }
+
+    .checklist .check-body .sub-links {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .checklist .check-body .sub-links a {
+      margin-right: 8px;
+    }
+
+    /* ── Alert/note box ── */
+    .alert-box {
+      background: #fff8e6;
+      border: 1px solid #f5c842;
+      border-left: 4px solid var(--va-gold);
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 0.92rem;
+    }
+
+    .alert-box strong { color: var(--va-navy); }
+
+    /* ── Training list ── */
+    .training-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .training-list li {
+      background: var(--va-light-blue);
+      border-radius: 4px;
+      padding: 10px 16px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--va-navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .training-list li::before {
+      content: "▶";
+      color: var(--va-blue);
+      font-size: 0.75rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--va-navy);
+      color: #9fb6cc;
+      font-size: 0.82rem;
+      text-align: center;
+      padding: 20px 24px;
+    }
+
+    footer a { color: var(--va-gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── General link style ── */
+    a { color: var(--va-blue); }
+    a:hover { color: var(--va-navy); }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.4rem; }
+      .teams-grid { grid-template-columns: 1fr; }
+      .editor-list { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-bar"></div>
+  <div class="header-inner">
+    <span class="badge">VA Internal Guide</span>
+    <h1>GitHub Copilot at VA<br>How to Get Access &amp; Get Started</h1>
+    <p class="subtitle">A complete guide for VA employees who want to use GitHub Copilot in their daily development workflow.</p>
+  </div>
+</header>
+
+<!-- ══ QUICK NAV ══ -->
+<nav class="toc-strip" aria-label="Page sections">
+  <div class="toc-strip-inner">
+    <a href="#join-org">1&nbsp;Join VA GitHub</a>
+    <a href="#request-access">2&nbsp;Request Access</a>
+    <a href="#install-ide">3&nbsp;Install in IDE</a>
+    <a href="#teams-channels">4&nbsp;Teams Channels</a>
+    <a href="#va-resources">5&nbsp;VA Resources</a>
+    <a href="#ghec-resources">6&nbsp;GHEC‑US Links</a>
+    <a href="#training">7&nbsp;Training</a>
+    <a href="#troubleshooting">8&nbsp;Troubleshooting</a>
+    <a href="#checklist">9&nbsp;Quick Checklist</a>
+  </div>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main>
+
+  <!-- Overview -->
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:6px;padding:22px 24px;margin-bottom:32px;">
+    <p>GitHub Copilot is an AI coding assistant that helps you write, understand, and improve code directly inside your preferred IDE (VS Code, Visual Studio, JetBrains, NeoVim, etc.). At the VA, Copilot is available <strong>only</strong> through the VA's GitHub Enterprise Cloud (GHEC‑US) environment at <strong>va.ghe.com</strong>.</p>
+    <p style="margin-top:12px;">This guide provides everything a new VA user needs to join the VA GitHub organization, request Copilot access, set up their editor, connect with the community, and find training and support.</p>
+  </div>
+
+  <!-- ── Step 1: Join VA GitHub ── -->
+  <div class="section-card" id="join-org">
+    <div class="section-card-header">
+      <span class="step-num">Step 1</span>
+      <h2>Prerequisite: Join the VA GitHub Organization</h2>
+    </div>
+    <div class="section-card-body">
+      <p>VA Copilot licenses are available <strong>only</strong> to users who are part of the official VA GitHub org. Submit the signup form below (requires VA network access). Once approved, your GHEC‑US account will be created using VA Single Sign‑On (Entra ID).</p>
+      <a class="cta-btn" href="https://vaww.oit.va.gov/services/github/#signup" target="_blank" rel="noopener">Join VA GitHub &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ── Step 2: Request Access ── -->
+  <div class="section-card" id="request-access">
+    <div class="section-card-header">
+      <span class="step-num">Step 2</span>
+      <h2>Request GitHub Copilot Access</h2>
+    </div>
+    <div class="section-card-body">
+      <p>Once you are in the VA GitHub organization, request Copilot access using the form below. Access is typically granted automatically within minutes.</p>
+      <a class="cta-btn" href="https://va.ghe.com/github-admin/copilot/issues/new?template=copilot-onboarding.yml" target="_blank" rel="noopener">Request Copilot Access &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ── Step 3: Install in IDE ── -->
+  <div class="section-card" id="install-ide">
+    <div class="section-card-header">
+      <span class="step-num">Step 3</span>
+      <h2>Install GitHub Copilot in Your IDE</h2>
+    </div>
+    <div class="section-card-body">
+      <p>After you receive your <em>"Welcome to Copilot Enterprise!"</em> email, install Copilot in your preferred editor using the official setup guides:</p>
+
+      <div class="editor-list">
+        <a class="cta-btn secondary" href="https://code.visualstudio.com/docs/copilot/setup" target="_blank" rel="noopener">VS Code</a>
+        <a class="cta-btn secondary" href="https://learn.microsoft.com/en-us/visualstudio/ide/using-github-copilot-in-visual-studio" target="_blank" rel="noopener">Visual Studio</a>
+        <a class="cta-btn secondary" href="https://docs.github.com/en/copilot/using-github-copilot/working-with-github-copilot-in-your-jetbrains-ide" target="_blank" rel="noopener">JetBrains</a>
+        <a class="cta-btn secondary" href="https://docs.github.com/en/copilot/using-github-copilot/working-with-github-copilot-in-neovim" target="_blank" rel="noopener">NeoVim</a>
+      </div>
+
+      <div class="alert-box" style="margin-top:18px;">
+        <strong>&#9888; Important:</strong> When signing in to VS Code or any editor, use your <strong>VA GitHub Enterprise account (va.ghe.com)</strong>, not GitHub.com.<br>
+        If you see a <em>"Free plan"</em> warning, you are signed in with the wrong GitHub account.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Step 4: Teams Channels ── -->
+  <div class="section-card" id="teams-channels">
+    <div class="section-card-header">
+      <span class="step-num">Step 4</span>
+      <h2>VA Microsoft Teams Channels to Join</h2>
+    </div>
+    <div class="section-card-body">
+      <p>These Teams channels are the <strong>official support and community hubs</strong> for GitHub Copilot and GitHub Enterprise at VA.</p>
+
+      <div class="teams-grid" style="margin-top:16px;">
+
+        <div class="teams-card">
+          <span class="tag tag-primary">Primary Support</span>
+          <h4>GitHub Copilot</h4>
+          <p>Ask questions, get help, and see announcements from the GitHub engineering team that supports VA.</p>
+          <a class="cta-btn" href="https://teams.microsoft.com/l/channel/19:8VpVI7PrJX-zgpfBqWCL5GeAFJpgq6KvhnPh2WR3GD81%40thread.tacv2/General?groupId=be80977b-836f-4073-81b9-7d25433720d8&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">Open in Teams &rarr;</a>
+        </div>
+
+        <div class="teams-card">
+          <span class="tag tag-primary">Recommended</span>
+          <h4>GHEC‑US‑Users</h4>
+          <p>Core community for all VA GitHub Enterprise Cloud users. Use for login problems, entitlement errors, firewall blocks, or Copilot API reachability issues.</p>
+          <a class="cta-btn" href="https://teams.microsoft.com/l/team/19%3AllDS-w05BiOnFMtP02NwDwix5Ku1xadJyXtP27NJlSg1%40thread.tacv2/conversations?groupId=71948235-4714-4643-a762-8b5a5a14abfb&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">Open in Teams &rarr;</a>
+        </div>
+
+        <div class="teams-card optional">
+          <span class="tag tag-optional">Optional</span>
+          <h4>AI@VA Community</h4>
+          <p>General discussions about AI tools at VA, including Copilot, ChatGPT Enterprise FedRAMP, Claude, and more.</p>
+          <a class="cta-btn secondary" href="https://teams.microsoft.com/l/team/19:fRkqGgH2XIu1KBV6btlG062ts5vI3YF3KrTR7oFUJOA1%40thread.tacv2/conversations?groupId=a90b9cd1-43a9-4826-b9a8-aa0960ccbf02&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">Open in Teams &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Step 5: VA Resources ── -->
+  <div class="section-card" id="va-resources">
+    <div class="section-card-header">
+      <span class="step-num">Step 5</span>
+      <h2>Official VA GitHub Copilot Pages &amp; Resources</h2>
+    </div>
+    <div class="section-card-body">
+      <ul class="resources-list">
+
+        <li>
+          <div class="res-title">GitHub Copilot Overview (VA)</div>
+          <div class="res-desc">What Copilot is, supported editors, requirements, and Teams support channel.</div>
+          <a class="cta-btn secondary" href="https://vaww.ea.oit.va.gov/about-us/" target="_blank" rel="noopener">GitHub Copilot Overview &rarr;</a>
+        </li>
+
+        <li>
+          <div class="res-title">GitHub Copilot FAQ</div>
+          <div class="res-desc">AI policy guidance, links to the GitHub Copilot Teams channel, AI tools list, and TRM references.</div>
+          <a class="cta-btn secondary" href="https://vaww.ea.oit.va.gov/about-us/" target="_blank" rel="noopener">View FAQs &rarr;</a>
+        </li>
+
+        <li>
+          <div class="res-title">Getting Started with AI at VA</div>
+          <div class="res-desc">Training resources, guidance for using AI responsibly, and AI@VA community links.</div>
+          <a class="cta-btn secondary" href="https://department.va.gov/ai/guidance-for-generative-ai-use-at-va/" target="_blank" rel="noopener">Getting Started with AI &rarr;</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Step 6: GHEC Resources ── -->
+  <div class="section-card" id="ghec-resources">
+    <div class="section-card-header">
+      <span class="step-num">Step 6</span>
+      <h2>GitHub Enterprise Cloud (GHEC‑US) Resources</h2>
+    </div>
+    <div class="section-card-body">
+      <div class="sub-section">
+        <h3>Access the VA GitHub Enterprise Cloud</h3>
+        <p>All VA GitHub work is done through the enterprise instance, not GitHub.com.</p>
+        <a class="cta-btn" href="https://va.ghe.com" target="_blank" rel="noopener">Open va.ghe.com &rarr;</a>
+      </div>
+
+      <div class="sub-section">
+        <h3>GitHub Admin Handbook (GHEC‑US)</h3>
+        <p>Contains Copilot setup, troubleshooting, and migration guides for VA GitHub Enterprise users.</p>
+        <a class="cta-btn secondary" href="https://department-of-veterans-affairs.github.io/github-handbook/" target="_blank" rel="noopener">GitHub Admin Handbook &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Step 7: Training ── -->
+  <div class="section-card" id="training">
+    <div class="section-card-header">
+      <span class="step-num">Step 7</span>
+      <h2>Training Videos &amp; Webinars (Internal VA Sessions)</h2>
+    </div>
+    <div class="section-card-body">
+      <p>The following VA Copilot training recordings are available in the enterprise media library. Link them if your webpage is internal.</p>
+      <ul class="training-list" style="margin-top:14px;">
+        <li>Copilot Fundamentals</li>
+        <li>Copilot Intermediate (L200)</li>
+        <li>Copilot Agent Mode</li>
+        <li>Copilot MCP (Model Context Protocol)</li>
+        <li>Copilot Resources, Tips &amp; Tricks</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Step 8: Troubleshooting ── -->
+  <div class="section-card" id="troubleshooting">
+    <div class="section-card-header">
+      <span class="step-num">Step 8</span>
+      <h2>Troubleshooting Tips</h2>
+    </div>
+    <div class="section-card-body">
+
+      <div class="trouble-item">
+        <h4>VS Code shows "Free Plan"</h4>
+        <p>You are logged in with a GitHub.com account, not your VA enterprise account.</p>
+        <p><strong>Fix:</strong> Log out and log back in using <strong>va.ghe.com</strong>.</p>
+      </div>
+
+      <div class="trouble-item">
+        <h4>Firewall or Reachability Errors</h4>
+        <p>Post the error in the <a href="https://teams.microsoft.com/l/team/19%3AllDS-w05BiOnFMtP02NwDwix5Ku1xadJyXtP27NJlSg1%40thread.tacv2/conversations?groupId=71948235-4714-4643-a762-8b5a5a14abfb&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">GHEC‑US‑Users Teams channel</a>. You may be asked to open a GitHub Admin support request.</p>
+      </div>
+
+      <div class="trouble-item">
+        <h4>Copilot Access Suddenly Disappeared</h4>
+        <p><strong>1.</strong> <a href="https://va.ghe.com/github-admin/copilot/issues/new?template=copilot-onboarding.yml" target="_blank" rel="noopener">Submit a new Copilot Access Request</a>.</p>
+        <p><strong>2.</strong> Verify you are still a member of the VA GitHub organization.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Step 9: Checklist ── -->
+  <div class="section-card" id="checklist">
+    <div class="section-card-header">
+      <span class="step-num">Step 9</span>
+      <h2>Quick Start Checklist</h2>
+    </div>
+    <div class="section-card-body">
+      <ul class="checklist">
+
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Join VA GitHub</strong>
+            <span class="sub-links"><a href="https://vaww.oit.va.gov/services/github/#signup" target="_blank" rel="noopener">Submit the signup form &rarr;</a></span>
+          </div>
+        </li>
+
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Request VA Copilot Access</strong>
+            <span class="sub-links"><a href="https://va.ghe.com/github-admin/copilot/issues/new?template=copilot-onboarding.yml" target="_blank" rel="noopener">Submit the access request &rarr;</a></span>
+          </div>
+        </li>
+
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Install Copilot in your preferred IDE</strong>
+            <span class="sub-links">
+              <a href="https://code.visualstudio.com/docs/copilot/setup" target="_blank" rel="noopener">VS Code</a>
+              <a href="https://learn.microsoft.com/en-us/visualstudio/ide/using-github-copilot-in-visual-studio" target="_blank" rel="noopener">Visual Studio</a>
+              <a href="https://docs.github.com/en/copilot/using-github-copilot/working-with-github-copilot-in-your-jetbrains-ide" target="_blank" rel="noopener">JetBrains</a>
+              <a href="https://docs.github.com/en/copilot/using-github-copilot/working-with-github-copilot-in-neovim" target="_blank" rel="noopener">NeoVim</a>
+            </span>
+          </div>
+        </li>
+
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Sign in with your VA GitHub account</strong>
+            <span class="sub-links">Make sure it says <strong>va.ghe.com</strong> — not GitHub.com</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="check-icon">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Join the community Teams channels</strong>
+            <span class="sub-links">
+              <a href="https://teams.microsoft.com/l/channel/19:8VpVI7PrJX-zgpfBqWCL5GeAFJpgq6KvhnPh2WR3GD81%40thread.tacv2/General?groupId=be80977b-836f-4073-81b9-7d25433720d8&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">GitHub Copilot</a>
+              <a href="https://teams.microsoft.com/l/team/19%3AllDS-w05BiOnFMtP02NwDwix5Ku1xadJyXtP27NJlSg1%40thread.tacv2/conversations?groupId=71948235-4714-4643-a762-8b5a5a14abfb&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">GHEC‑US‑Users</a>
+              <a href="https://teams.microsoft.com/l/team/19:fRkqGgH2XIu1KBV6btlG062ts5vI3YF3KrTR7oFUJOA1%40thread.tacv2/conversations?groupId=a90b9cd1-43a9-4826-b9a8-aa0960ccbf02&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">AI@VA (optional)</a>
+            </span>
+          </div>
+        </li>
+
+        <li>
+          <div class="check-icon" style="background:var(--va-navy);">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill="#fdb81e" d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>
+          </div>
+          <div class="check-body">
+            <strong>Start using GitHub Copilot!</strong>
+            <span class="sub-links">You're all set. Open your IDE and start coding with AI assistance.</span>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>Department of Veterans Affairs &mdash; Internal GitHub Copilot Onboarding Guide &mdash; VA GitHub Enterprise Cloud (GHEC‑US)</p>
+  <p style="margin-top:6px;">Questions? Post in the <a href="https://teams.microsoft.com/l/channel/19:8VpVI7PrJX-zgpfBqWCL5GeAFJpgq6KvhnPh2WR3GD81%40thread.tacv2/General?groupId=be80977b-836f-4073-81b9-7d25433720d8&tenantId=e95f1b23-abaf-45ee-821d-b7ab251ab3bf" target="_blank" rel="noopener">GitHub Copilot Teams channel</a>.</p>
+</footer>
+
+</body>
+</html>
