@@ -467,6 +467,7 @@
     <a href="#join-org">1&nbsp;Join VA GitHub</a>
     <a href="#request-access">2&nbsp;Request Access</a>
     <a href="#install-ide">3&nbsp;Install in IDE</a>
+    <a href="#required-software">Required Software</a>
     <a href="#teams-channels">4&nbsp;Teams Channels</a>
     <a href="#va-resources">5&nbsp;VA Resources</a>
     <a href="#ghec-resources">6&nbsp;GHEC‑US Links</a>
@@ -528,6 +529,77 @@
       <div class="alert-box" style="margin-top:18px;">
         <strong>&#9888; Important:</strong> When signing in to VS Code or any editor, use your <strong>VA GitHub Enterprise account (va.ghe.com)</strong>, not GitHub.com.<br>
         If you see a <em>"Free plan"</em> warning, you are signed in with the wrong GitHub account.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Required Software ── -->
+  <div class="section-card" id="required-software">
+    <div class="section-card-header" style="background:#1a3a5c;">
+      <span class="step-num" style="background:var(--va-green);color:var(--white);">TRM Approved</span>
+      <h2>Required Software for GitHub Copilot &amp; AI Development</h2>
+    </div>
+    <div class="section-card-body">
+      <p>GitHub Copilot doesn't work in isolation — it's part of a small stack of tools that work together to give VA developers a modern, AI-assisted environment. All four tools below are <strong>approved on the VA Technical Reference Model (TRM)</strong>. If any are not already installed on your VA workstation, simply <strong>open a helpdesk ticket</strong> and point your IT support person to the TRM link for each one.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:18px;margin-top:18px;">
+
+        <!-- VS Code -->
+        <div style="border:1px solid var(--border);border-radius:6px;padding:20px 22px;background:#f9fbfd;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span style="font-size:1.5rem;">🖥️</span>
+            <div>
+              <div style="font-weight:800;font-size:1rem;color:var(--va-navy);">Visual Studio Code (VS Code)</div>
+              <div style="font-size:0.78rem;color:var(--va-green);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">TRM Approved</div>
+            </div>
+          </div>
+          <p style="font-size:0.9rem;margin-bottom:12px;">VS Code is the primary IDE (code editor) for GitHub Copilot at VA. Copilot runs as a VS Code extension and surfaces AI suggestions, chat, and agent mode directly inside the editor. Without VS Code, Copilot has no interface to work from. This is your primary tool.</p>
+          <a class="cta-btn secondary" href="https://www.oit.va.gov/services/trm/ToolPage.aspx?tid=8371" target="_blank" rel="noopener" style="font-size:0.83rem;padding:7px 14px;">View VS Code on VA TRM &rarr;</a>
+        </div>
+
+        <!-- Git -->
+        <div style="border:1px solid var(--border);border-radius:6px;padding:20px 22px;background:#f9fbfd;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span style="font-size:1.5rem;">🔀</span>
+            <div>
+              <div style="font-weight:800;font-size:1rem;color:var(--va-navy);">Git</div>
+              <div style="font-size:0.78rem;color:var(--va-green);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">TRM Approved</div>
+            </div>
+          </div>
+          <p style="font-size:0.9rem;margin-bottom:12px;">Git is the version control system that powers GitHub. When you push code to va.ghe.com, clone repositories, or use Copilot's built-in source control features, Git is running behind the scenes. It must be installed on your workstation for VS Code's GitHub integration and Copilot to connect to va.ghe.com.</p>
+          <a class="cta-btn secondary" href="https://www.oit.va.gov/Services/TRM/ToolPage.aspx?tid=6396" target="_blank" rel="noopener" style="font-size:0.83rem;padding:7px 14px;">View Git on VA TRM &rarr;</a>
+        </div>
+
+        <!-- Node.js -->
+        <div style="border:1px solid var(--border);border-radius:6px;padding:20px 22px;background:#f9fbfd;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span style="font-size:1.5rem;">⚙️</span>
+            <div>
+              <div style="font-weight:800;font-size:1rem;color:var(--va-navy);">Node.js</div>
+              <div style="font-size:0.78rem;color:var(--va-green);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">TRM Approved</div>
+            </div>
+          </div>
+          <p style="font-size:0.9rem;margin-bottom:12px;">Node.js is a JavaScript runtime that powers many of the tools VA developers use, including VS Code extensions, GitHub Copilot's local processing components, and Model Context Protocol (MCP) servers. It is also required for building modern web applications and automation scripts. Many VA AI tools depend on Node.js being available on the workstation.</p>
+          <a class="cta-btn secondary" href="https://www.oit.va.gov/Services/TRM/ToolPage.aspx?tid=6716" target="_blank" rel="noopener" style="font-size:0.83rem;padding:7px 14px;">View Node.js on VA TRM &rarr;</a>
+        </div>
+
+        <!-- Python -->
+        <div style="border:1px solid var(--border);border-radius:6px;padding:20px 22px;background:#f9fbfd;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <span style="font-size:1.5rem;">🐍</span>
+            <div>
+              <div style="font-weight:800;font-size:1rem;color:var(--va-navy);">Python</div>
+              <div style="font-size:0.78rem;color:var(--va-green);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;">TRM Approved</div>
+            </div>
+          </div>
+          <p style="font-size:0.9rem;margin-bottom:12px;">Python is one of the most widely used languages for AI, data science, and automation. GitHub Copilot excels at writing and explaining Python code, and many VA AI workflows — including data pipelines, automation scripts, and MCP tool servers — are written in Python. Having Python installed allows you to immediately run and test Copilot-generated code locally.</p>
+          <a class="cta-btn secondary" href="https://oit.va.gov/Services/TRM/StandardPage.aspx?tid=5702" target="_blank" rel="noopener" style="font-size:0.83rem;padding:7px 14px;">View Python on VA TRM &rarr;</a>
+        </div>
+
+      </div>
+
+      <div class="alert-box" style="margin-top:20px;">
+        <strong>&#9432; How to request installation:</strong> Open a <strong>helpdesk ticket</strong> and request each tool by name. Include the VA TRM link in your ticket as proof of approval — this speeds up the process significantly. Your IT support person can verify approval status directly from the TRM page.
       </div>
     </div>
   </div>
